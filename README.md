@@ -1,326 +1,118 @@
-# 🚀 Projeto Java - Exercícios e Projetos Completos
+# JavaLab
 
-Este repositório contém uma coleção completa de exercícios e projetos em Java, implementando conceitos desde fundamentos básicos até técnicas avançadas de programação.
+Coleção de aplicações e utilitários em Java puro (sem frameworks pesados), cobrindo desde operações matemáticas básicas até um sistema de gestão de tarefas com persistência em banco de dados.
 
-## 📁 Estrutura do Projeto
+Cada módulo é independente e pode ser compilado e executado isoladamente — não há acoplamento entre eles.
+
+## Aplicações
+
+### Calculadora
+Calculadora de linha de comando com menu interativo: soma, subtração, multiplicação, divisão e potenciação, com submenu para acumular resultados de somas e subtrações.
 
 ```
-Java/
-├── exercicios/
-│   ├── exercicio1/          # Cálculo de Idade - Conceitos básicos
-│   ├── exercicio2/          # Estruturas de Controle
-│   ├── exercicio3/          # Classes e Encapsulamento
-│   ├── exercicio4/          # Herança e Polimorfismo
-│   ├── exercicio5/          # Interfaces e Lambda
-│   └── exercicio6/          # Collections e Classes Úteis
-├── projetos/
-│   ├── calculadora/         # Calculadora com menu interativo
-│   ├── sudoku/             # Jogo de Sudoku completo
-│   ├── jogo-memoria/       # Jogo da memória com persistência
-│   └── board-tarefas/      # Sistema Kanban com banco MySQL
-├── docs/
-│   ├── exercicios/         # Documentação dos exercícios
-│   └── projetos/           # Documentação dos projetos
-├── pom.xml                 # Configuração Maven principal
-└── README.md               # Este arquivo
-```
-
-## 🎯 **EXERCÍCIOS PRÁTICOS**
-
-### **1. 📊 Exercicio1 - Fundamentos da Linguagem**
-**Arquivo:** `exercicios/exercicio1/Exercicio1.java`  
-**Conceitos:** Variáveis, tipos de dados, Scanner, cálculos básicos  
-**Funcionalidades:**
-- Cálculo de idade baseado no ano de nascimento
-- Entrada de dados via Scanner
-- Operações matemáticas básicas
-- Formatação de saída
-
-**Como executar:**
-```bash
-cd exercicios/exercicio1
-javac Exercicio1.java
-java Exercicio1
-```
-
----
-
-### **2. 🔢 Exercicio2 - Estruturas de Controle**
-**Arquivo:** `exercicios/exercicio2/Exercicio2.java`  
-**Conceitos:** if/else, switch, loops, operadores lógicos  
-**Funcionalidades:**
-- Menu interativo com 6 opções
-- Operações básicas (soma, subtração, multiplicação, divisão)
-- Verificação de números pares/ímpares
-- Cálculo de fatorial
-- Verificação de números primos
-- Tabuada de multiplicação
-
-**Como executar:**
-```bash
-cd exercicios/exercicio2
-javac Exercicio2.java
-java Exercicio2
-```
-
----
-
-### **3. 🏗️ Exercicio3 - Classes e Encapsulamento**
-**Arquivo:** `exercicios/exercicio3/Exercicio3.java`  
-**Conceitos:** Classes, objetos, encapsulamento, métodos  
-**Funcionalidades:**
-- **Conta Bancária**: Saldo, cheque especial, depósitos, saques
-- **Carro**: Ligar/desligar, acelerar, virar, trocar marcha
-- **Máquina de Banho**: Gerenciar pet, água, shampoo, limpeza
-
-**Como executar:**
-```bash
-cd exercicios/exercicio3
-javac Exercicio3.java
-java Exercicio3
-```
-
----
-
-### **4. 🔄 Exercicio4 - Herança e Polimorfismo**
-**Arquivo:** `exercicios/exercicio4/Exercicio4.java`  
-**Conceitos:** Herança, classes abstratas, polimorfismo, sobrescrita  
-**Funcionalidades:**
-- **Sistema de Ingressos**: Normal, Meia Entrada, Família
-- **Sistema de Usuários**: Gerente, Vendedor, Atendente
-- **Sistema de Relógios**: Americano (12h) e Brasileiro (24h)
-
-**Como executar:**
-```bash
-cd exercicios/exercicio4
-javac Exercicio4.java
-java Exercicio4
-```
-
----
-
-### **5. 🔌 Exercicio5 - Interfaces e Lambda**
-**Arquivo:** `exercicios/exercicio5/Exercicio5.java`  
-**Conceitos:** Interfaces, implementação, polimorfismo  
-**Funcionalidades:**
-- **Sistema de Mensagens**: SMS, Email, Redes Sociais, WhatsApp
-- **Sistema de Tributos**: Produtos com diferentes taxas
-- **Sistema de Figuras**: Cálculo de áreas (Quadrado, Retângulo, Círculo)
-
-**Como executar:**
-```bash
-cd exercicios/exercicio5
-javac Exercicio5.java
-java Exercicio5
-```
-
----
-
-### **6. 📚 Exercicio6 - Collections e Classes Úteis**
-**Arquivo:** `exercicios/exercicio6/Exercicio6.java`  
-**Conceitos:** Collections, Streams, Regex, formatação  
-**Funcionalidades:**
-- **Calculadora com Collections**: Soma e subtração de listas
-- **Formatador de Telefones**: Formatação automática (fixo/celular)
-- **Gerador de Formatos**: JSON, XML, YAML a partir de campos
-
-**Como executar:**
-```bash
-cd exercicios/exercicio6
-javac Exercicio6.java
-java Exercicio6
-```
-
----
-
-## 🚀 **PROJETOS COMPLETOS**
-
-### **1. 🧮 Calculadora Interativa**
-**Pasta:** `projetos/calculadora/`  
-**Conceitos:** Fundamentos Java, estruturas de controle, loops  
-**Funcionalidades:**
-- Menu interativo com operações matemáticas
-- Validação de entrada (divisão por zero)
-- Interface amigável com Scanner
-
-**Como executar:**
-```bash
 cd projetos/calculadora
 javac Calculadora.java
 java Calculadora
 ```
 
----
+Saída de exemplo:
+```
+=== CALCULADORA ===
+1. Realizar uma soma
+...
+Escolha uma opção: 1
+Digite o primeiro número: 4
+Digite o segundo número: 6
+Resultado: 4.0 + 6.0 = 10.0
+```
 
-### **2. 🎯 Jogo de Sudoku**
-**Pasta:** `projetos/sudoku/`  
-**Conceitos:** OOP, classes, arrays, validação  
-**Funcionalidades:**
-- Menu interativo com 9 opções
-- Sistema de rascunhos
-- Validação de regras do Sudoku
-- Verificação de status e conflitos
+### Sudoku
+Jogo de Sudoku com tabuleiro 9x9, validação de linhas, colunas e quadrantes 3x3, sistema de rascunhos e verificação de conflitos. Disponível em versão texto (`Sudoku`) e com interface gráfica Swing (`SudokuGUI`).
 
-**Como executar:**
-```bash
+```
 cd projetos/sudoku
 javac Sudoku.java
 java Sudoku
 ```
 
----
+A versão texto aceita posições fixas via argumentos de linha de comando (`linha,coluna;valor,editável`):
+```
+java Sudoku 0,0;4,false 1,0;7,false 2,0;9,true
+```
 
-### **3. 🧠 Jogo da Memória**
-**Pasta:** `projetos/jogo-memoria/`  
-**Conceitos:** Collections, I/O, persistência, exceções  
-**Funcionalidades:**
-- Criação de coleções personalizadas de cartas
-- Sistema de jogo com virar cartas
-- Contagem de lances e percentual de acertos
-- Persistência em JSON e YAML
-- Múltiplos jogos simultâneos
+Ou, usando os scripts utilitários em `bin/` (compilam e já executam):
+```
+bin/run.sh      # Linux/macOS
+bin\run.bat     # Windows
+```
 
-**Como executar:**
-```bash
+### Jogo da Memória
+Jogo de cartas com pares a serem encontrados, contagem de tentativas, percentual de acerto e suporte a múltiplas partidas simultâneas. O estado da partida é persistido em JSON e YAML via Jackson.
+
+```
 cd projetos/jogo-memoria
 mvn clean compile
 mvn exec:java -Dexec.mainClass="JogoMemoria"
 ```
 
----
+### Board de Tarefas
+Sistema de board no estilo Kanban: colunas de workflow padrão, bloqueio/desbloqueio de cards com motivo registrado e relatórios de tempo gasto e tempo bloqueado por card. Persistência via JDBC em MySQL.
 
-### **4. 📊 Board de Gerenciamento de Tarefas**
-**Pasta:** `projetos/board-tarefas/`  
-**Conceitos:** JDBC, design patterns, banco de dados  
-**Funcionalidades:**
-- Boards personalizáveis com colunas padrão
-- Sistema de workflow entre colunas
-- Cards com bloqueio/desbloqueio
-- Persistência em MySQL
-- Relatórios de tempo e bloqueios
-
-**Requisitos:**
-- MySQL Server rodando na porta 3306
-- Usuário: `root` com senha configurável
-
-**Como executar:**
-```bash
+```
 cd projetos/board-tarefas
 mvn clean compile
 mvn exec:java -Dexec.mainClass="BoardTarefas"
 ```
 
----
+Requer um MySQL 8.0+ acessível (porta e usuário configuráveis em `BoardTarefas.java`); o schema `board_tarefas` é criado automaticamente na primeira execução.
 
-## 🛠️ **Tecnologias e Ferramentas**
+### Módulos de exemplo (`exercicios/`)
+Pequenos programas de referência para conceitos específicos da linguagem, cada um autocontido em `exercicios/exercicioN/`:
 
-### **Linguagem e Plataforma**
-- **Java 11+** - Linguagem principal
-- **Maven** - Gerenciamento de dependências (para projetos específicos)
-- **JDBC** - Conexão com banco de dados
-- **MySQL** - Banco de dados para Board de Tarefas
+| Módulo | Conteúdo |
+|---|---|
+| `exercicio1` | Tipos primitivos, entrada via `Scanner`, cálculo simples |
+| `exercicio2` | Estruturas de controle, laços, menu interativo (tabuada, IMC, paridade, divisão) |
+| `exercicio3` | Classes, objetos e encapsulamento (conta bancária, carro, banho de pet) |
+| `exercicio4` | Herança e polimorfismo (ingressos, usuários, formatos de hora) |
+| `exercicio5` | Interfaces e implementação (mensagens, tributos, cálculo de área) |
+| `exercicio6` | Collections, streams e regex (operações em lista, formatação de telefone, geração de JSON/XML/YAML) |
 
-### **Dependências Específicas**
-- **Jackson** - Serialização JSON/YAML (Jogo da Memória)
-- **MySQL Connector** - Driver para MySQL (Board de Tarefas)
-
----
-
-## 🚀 **Como Executar o Projeto**
-
-### **1. Pré-requisitos**
-- Java JDK 11 ou superior
-- Maven 3.6+ (para projetos específicos)
-- MySQL 8.0+ (para board-tarefas)
-
-### **2. Exercícios (Compilação Simples)**
-```bash
-# Navegar para o exercício desejado
-cd exercicios/exercicioX
-
-# Compilar
-javac ExercicioX.java
-
-# Executar
-java ExercicioX
+Compilação individual:
+```
+cd exercicios/exercicio1
+javac Exercicio1.java
+java Exercicio1
 ```
 
-### **3. Projetos com Maven**
-```bash
-# Navegar para o projeto
-cd projetos/nome-projeto
+## Stack
 
-# Compilar
-mvn clean compile
+- Java 11+
+- Maven (para os módulos com dependências: `jogo-memoria` e `board-tarefas`)
+- Jackson (JSON/YAML) — `jogo-memoria`
+- MySQL Connector/J — `board-tarefas`
+- Swing — `SudokuGUI`
 
-# Executar
-mvn exec:java -Dexec.mainClass="NomeClassePrincipal"
+## Como rodar tudo
+
+```
+./build.sh      # Linux/macOS — compila exercícios e projetos
+build.bat       # Windows
 ```
 
-### **4. Projetos Simples (Sem Maven)**
-```bash
-cd projetos/calculadora
-javac Calculadora.java
-java Calculadora
+Pré-requisitos: JDK 11+; Maven 3.6+ e MySQL 8.0+ apenas para os módulos que dependem deles.
 
-cd ../sudoku
-javac Sudoku.java
-java Sudoku
-```
+## Testes
 
----
+O projeto usa JUnit 4 (declarado em `pom.xml`) para os módulos Maven. Não há suíte de testes automatizados ainda — contribuições nessa área são bem-vindas.
 
-## 📚 **Níveis de Aprendizado**
+## Documentação
 
-| Categoria | Conceitos | Nível |
-|-----------|-----------|-------|
-| **Exercicio1** | Sintaxe básica, Scanner | Básico |
-| **Exercicio2** | Estruturas de controle, Loops | Básico |
-| **Exercicio3** | Classes, Objetos, Encapsulamento | Intermediário |
-| **Exercicio4** | Herança, Polimorfismo | Intermediário |
-| **Exercicio5** | Interfaces, Implementação | Intermediário |
-| **Exercicio6** | Collections, Streams, Regex | Avançado |
-| **Calculadora** | Estruturas básicas | Básico |
-| **Sudoku** | Classes, Arrays, Validação | Intermediário |
-| **Jogo da Memória** | Collections, I/O, Persistência | Avançado |
-| **Board de Tarefas** | JDBC, Design Patterns, BD | Avançado |
+Notas de estudo detalhadas por módulo estão em `docs/exercicios/` e `docs/projetos/`.
+
+## Licença
+
+Uso livre para fins educacionais e de referência.
 
 ---
-
-## 🔧 **Configurações Específicas**
-
-### **MySQL (Board de Tarefas)**
-1. Instalar MySQL Server 8.0+
-2. Configurar usuário `root` com senha
-3. Verificar porta 3306 disponível
-4. O sistema cria automaticamente o banco `board_tarefas`
-
-### **Arquivos de Dados**
-- **Jogo da Memória:** `jogo_memoria.json` e `jogo_memoria.yaml`
-- **Board de Tarefas:** Banco MySQL (criado automaticamente)
-
----
-
-## 🧪 **Testes Rápidos**
-
-### **Verificar Compilação**
-```bash
-# Compilar todos os exercícios
-cd exercicios
-javac exercicio*/Exercicio*.java
-
-# Verificar arquivos .class criados
-dir exercicio*/Exercicio*.class
-```
----
-
-## 📝 **Contribuições**
-
-Este repositório é para fins educacionais. Contribuições são bem-vindas:
-
-- 🔧 Melhorar código existente
-- 🐛 Reportar bugs
-- 💡 Sugerir novas funcionalidades
-- 📚 Adicionar documentação
-- 🧪 Criar testes unitários
-
+Base: estudos da trilha Java da DIO.

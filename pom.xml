@@ -10,8 +10,8 @@
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>Exercícios e Projetos Java</name>
-    <description>Coleção de exercícios e projetos práticos em Java</description>
+    <name>JavaLab</name>
+    <description>Coleção de aplicações e utilitários em Java</description>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

@@ -17,7 +17,7 @@ public class SudokuGUI extends JFrame {
     private int horas = 0;
     
     public SudokuGUI() {
-        setTitle("Sudoku - DIO Challenge");
+        setTitle("JavaLab - Sudoku");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 700);
         setLocationRelativeTo(null);
