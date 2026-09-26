@@ -1,134 +1,84 @@
 # JavaLab
 
-**[Ver ao vivo](https://leandromlmoreira.github.io/Java/)**
+Quatro aplicações em Java puro abertas numa IDE que roda no navegador: o código-fonte real ao lado de um porte fiel que você executa ali mesmo.
 
-[![Preview do site](docs/preview.png)](https://leandromlmoreira.github.io/Java/)
+**[Ver ao vivo →](https://leandromlmoreira.github.io/javalab/)**
 
-Coleção de aplicações e utilitários em Java puro (sem frameworks pesados), cobrindo desde operações matemáticas básicas até um sistema de gestão de tarefas com persistência em banco de dados.
+[![JavaLab rodando o Sudoku ao lado do código de Sudoku.java](docs/preview.png)](https://leandromlmoreira.github.io/javalab/)
 
-Cada módulo é independente e pode ser compilado e executado isoladamente — não há acoplamento entre eles.
+<p align="center">
+  <img src="docs/preview.gif" alt="Demonstração: Sudoku, Jogo da Memória e Calculadora rodando no painel Run" width="720" />
+</p>
 
-## Aplicações
+## O que tem aqui
 
-### Calculadora
-Calculadora de linha de comando com menu interativo: soma, subtração, multiplicação, divisão e potenciação, com submenu para acumular resultados de somas e subtrações.
+| App | O que faz | Onde |
+|---|---|---|
+| **Sudoku** | Tabuleiro 9x9 com gerador, três dificuldades (30/40/50 casas removidas), validação de linha, coluna e quadrante, verificação de status e cronômetro. Versão texto e versão Swing. | `projetos/sudoku/` |
+| **Jogo da Memória** | Coleções de cartas (mínimo 10), lances, acertos, percentual e pausa, com estado salvo em JSON e YAML via Jackson. | `projetos/jogo-memoria/` |
+| **Calculadora** | Menu em loop com `Scanner`: soma, subtração, multiplicação, divisão com resto, potência e submenu que acumula resultados. | `projetos/calculadora/` |
+| **Board de Tarefas** | Kanban com colunas padrão, bloqueio/desbloqueio com motivo e relatórios de tempo e bloqueios, persistido em MySQL via JDBC. | `projetos/board-tarefas/` |
+| **Exercícios 1 a 6** | Tipos, controle de fluxo, POO, herança, interfaces, collections e streams. | `exercicios/` |
 
-```
-cd projetos/calculadora
-javac Calculadora.java
-java Calculadora
-```
+## A IDE no navegador
 
-Saída de exemplo:
-```
-=== CALCULADORA ===
-1. Realizar uma soma
-...
-Escolha uma opção: 1
-Digite o primeiro número: 4
-Digite o segundo número: 6
-Resultado: 4.0 + 6.0 = 10.0
-```
+Java não roda no navegador, então a pasta `web/` monta uma IDE retrô que mostra o repositório de verdade e executa um porte de cada `main()`:
 
-### Sudoku
-Jogo de Sudoku com tabuleiro 9x9, validação de linhas, colunas e quadrantes 3x3, sistema de rascunhos e verificação de conflitos. Disponível em versão texto (`Sudoku`) e com interface gráfica Swing (`SudokuGUI`).
-
-```
-cd projetos/sudoku
-javac Sudoku.java
-java Sudoku
-```
-
-A versão texto aceita posições fixas via argumentos de linha de comando (`linha,coluna;valor,editável`):
-```
-java Sudoku 0,0;4,false 1,0;7,false 2,0;9,true
-```
-
-Ou, usando os scripts utilitários em `bin/` (compilam e já executam):
-```
-bin/run.sh      # Linux/macOS
-bin\run.bat     # Windows
-```
-
-### Jogo da Memória
-Jogo de cartas com pares a serem encontrados, contagem de tentativas, percentual de acerto e suporte a múltiplas partidas simultâneas. O estado da partida é persistido em JSON e YAML via Jackson.
-
-```
-cd projetos/jogo-memoria
-mvn clean compile
-mvn exec:java -Dexec.mainClass="JogoMemoria"
-```
-
-### Board de Tarefas
-Sistema de board no estilo Kanban: colunas de workflow padrão, bloqueio/desbloqueio de cards com motivo registrado e relatórios de tempo gasto e tempo bloqueado por card. Persistência via JDBC em MySQL.
-
-```
-cd projetos/board-tarefas
-mvn clean compile
-mvn exec:java -Dexec.mainClass="BoardTarefas"
-```
-
-Requer um MySQL 8.0+ acessível (porta e usuário configuráveis em `BoardTarefas.java`); o schema `board_tarefas` é criado automaticamente na primeira execução.
-
-### Módulos de exemplo (`exercicios/`)
-Pequenos programas de referência para conceitos específicos da linguagem, cada um autocontido em `exercicios/exercicioN/`:
-
-| Módulo | Conteúdo |
-|---|---|
-| `exercicio1` | Tipos primitivos, entrada via `Scanner`, cálculo simples |
-| `exercicio2` | Estruturas de controle, laços, menu interativo (tabuada, IMC, paridade, divisão) |
-| `exercicio3` | Classes, objetos e encapsulamento (conta bancária, carro, banho de pet) |
-| `exercicio4` | Herança e polimorfismo (ingressos, usuários, formatos de hora) |
-| `exercicio5` | Interfaces e implementação (mensagens, tributos, cálculo de área) |
-| `exercicio6` | Collections, streams e regex (operações em lista, formatação de telefone, geração de JSON/XML/YAML) |
-
-Compilação individual:
-```
-cd exercicios/exercicio1
-javac Exercicio1.java
-java Exercicio1
-```
-
-## Front-end de apresentação
-
-Como Java não roda no navegador, a pasta `web/` traz uma página estática (Vite + TypeScript) que apresenta cada aplicação com sua descrição, um trecho de código real do repositório com destaque de sintaxe, e uma versão jogável do Sudoku portada fielmente para JavaScript — incluindo a mesma validação de linhas, colunas e quadrantes 3x3 de `Sudoku.java`.
-
-```
-cd web
-npm install
-npm run dev
-```
-
-O deploy é automático via GitHub Actions para o GitHub Pages a cada push em `web/` na branch `main`.
+- **Explorador com a árvore real do repositório**: a lista de arquivos e o conteúdo exibido vêm dos próprios `.java`, `pom.xml`, scripts e notas em `docs/`, importados no build (`import.meta.glob` com `?raw`). Nada é copiado à mão.
+- **Abas, breadcrumb e destaque de sintaxe** com um tokenizador próprio e pequeno para Java, Markdown, XML e shell.
+- **Painel Run**: cada app passa por uma animação de `javac`/`mvn compile` com a contagem real de linhas e então roda:
+  - **Sudoku**: gerador por backtracking usando o mesmo `podeColocarNumero()`, dificuldades do `SudokuGUI`, opções do menu de `Sudoku.java` (verificar, status, limpar, finalizar) com as mesmas mensagens, teclado e cronômetro.
+  - **Jogo da Memória**: `Carta`, `Colecao` e `Jogo` portados, espera de 2 s no erro como o `Thread.sleep(2000)`, pausa, status, criação de coleções e placar salvo no navegador no lugar do `jogo_memoria.json`.
+  - **Calculadora**: o programa inteiro roda num terminal com um `Scanner` assíncrono, formatação de `double` igual à do Java e até o `InputMismatchException` quando a entrada é inválida.
+  - **Board de Tarefas**: simulação em memória com as mesmas regras (card bloqueado não anda, coluna final, cancelamento) e o SQL que o `PreparedStatement` executaria aparecendo no log.
+- **Efeito CRT** sutil (scanlines e brilho leve) que pode ser desligado na barra de status.
+- **Mobile**: explorador vira gaveta, e Código e Run alternam em tela cheia.
 
 ## Stack
 
-- Java 11+
-- Maven (para os módulos com dependências: `jogo-memoria` e `board-tarefas`)
-- Jackson (JSON/YAML) — `jogo-memoria`
-- MySQL Connector/J — `board-tarefas`
-- Swing — `SudokuGUI`
+- **Java 11+**, Maven (módulos `jogo-memoria` e `board-tarefas`), Jackson (JSON/YAML), MySQL Connector/J, Swing
+- **Web**: Vite + TypeScript sem framework, CSS próprio, fontes Instrument Serif, Geist e JetBrains Mono
+- **Deploy**: GitHub Actions publicando `web/dist` no GitHub Pages
 
-## Como rodar tudo
+## Como rodar
 
-```
-./build.sh      # Linux/macOS — compila exercícios e projetos
+### Os apps Java
+
+```bash
+./build.sh      # Linux/macOS: compila exercícios e projetos
 build.bat       # Windows
 ```
 
-Pré-requisitos: JDK 11+; Maven 3.6+ e MySQL 8.0+ apenas para os módulos que dependem deles.
+```bash
+cd projetos/sudoku && javac Sudoku.java SudokuGUI.java && java SudokuGUI
+cd projetos/calculadora && javac Calculadora.java && java Calculadora
+cd projetos/jogo-memoria && mvn -q compile exec:java -Dexec.mainClass="JogoMemoria"
+cd projetos/board-tarefas && mvn -q compile exec:java -Dexec.mainClass="BoardTarefas"
+```
 
-## Testes
+A versão texto do Sudoku aceita números fixos por argumento (`numero linha coluna`), e `bin/run.sh` / `bin\run.bat` compilam e executam direto. O Board de Tarefas precisa de um MySQL 8.0+ (URL e usuário em `BoardTarefas.java`); as tabelas são criadas na primeira execução.
 
-O projeto usa JUnit 4 (declarado em `pom.xml`) para os módulos Maven. Não há suíte de testes automatizados ainda — contribuições nessa área são bem-vindas.
+Pré-requisitos: JDK 11+; Maven 3.6+ e MySQL 8.0+ só para os módulos que dependem deles.
+
+### A IDE web
+
+```bash
+cd web
+npm install
+npm run dev      # desenvolvimento
+npm run build    # gera web/dist
+```
+
+O deploy roda sozinho a cada push na `main` que mexa em `web/`, nos fontes Java ou em `docs/`.
 
 ## Documentação
 
-Notas de estudo detalhadas por módulo estão em `docs/exercicios/` e `docs/projetos/`.
+Notas de estudo por módulo em `docs/exercicios/` e `docs/projetos/`, também navegáveis pela IDE.
 
 ## Licença
 
 Uso livre para fins educacionais e de referência.
 
 ---
-Base: estudos da trilha Java da DIO.
+
+<sub>Base: estudos da trilha Java da DIO.</sub>
