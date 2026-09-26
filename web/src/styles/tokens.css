@@ -1,0 +1,60 @@
+:root {
+  color-scheme: dark;
+
+  --bg: #0b0a09;
+  --shell: #121110;
+  --surface: #151311;
+  --editor: #13110f;
+  --panel: #171512;
+  --well: #0e0d0b;
+  --raised: #1f1c18;
+  --raised-2: #2a2621;
+
+  --line: rgba(255, 238, 214, 0.07);
+  --line-2: rgba(255, 238, 214, 0.12);
+  --line-3: rgba(255, 238, 214, 0.2);
+
+  --text: #efe7da;
+  --text-2: #c4b9a8;
+  --muted: #8d8375;
+  --faint: #5f574d;
+
+  --amber: #ffb547;
+  --amber-2: #ffd08a;
+  --amber-ink: #231605;
+  --amber-soft: rgba(255, 181, 71, 0.12);
+  --amber-line: rgba(255, 181, 71, 0.38);
+  --green: #7ddc94;
+  --green-ink: #06140a;
+  --green-soft: rgba(125, 220, 148, 0.1);
+  --green-line: rgba(125, 220, 148, 0.3);
+  --red: #ff7a66;
+  --red-soft: rgba(255, 122, 102, 0.1);
+  --red-line: rgba(255, 122, 102, 0.32);
+  --blue: #8ab4ff;
+  --blue-soft: rgba(138, 180, 255, 0.07);
+  --violet: #c8a2ff;
+
+  --tk-kw: #f0a35e;
+  --tk-type: #b9c7ff;
+  --tk-fn: #f3d58c;
+  --tk-str: #a8cf86;
+  --tk-num: #7fc4e8;
+  --tk-com: #6f675c;
+  --tk-ann: #d7b45f;
+  --tk-const: #c8a2ff;
+  --tk-punct: #a0968a;
+  --tk-plain: #ded5c7;
+
+  --font-ui: 'Geist', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', monospace;
+  --font-display: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  --act: 50px;
+  --side: 244px;
+  --radius: 16px;
+}

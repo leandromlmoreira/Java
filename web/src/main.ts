@@ -1,186 +1,95 @@
-import './style.css'
-import hljs from 'highlight.js/lib/core'
-import java from 'highlight.js/lib/languages/java'
-import 'highlight.js/styles/atom-one-light.css'
-import { apps } from './snippets'
-import { SudokuGame } from './sudoku'
+import './styles/tokens.css'
+import './styles/base.css'
+import './styles/ide.css'
+import './styles/code.css'
+import './styles/run.css'
+import './styles/apps.css'
+import './styles/mobile.css'
+import { Actions } from './ui/actions'
+import { createActivityBar, createMobileNav, createStatusBar } from './ui/chrome'
+import { h } from './ui/dom'
+import { createEditor } from './ui/editor'
+import { createExplorer } from './ui/explorer'
+import { createResizer } from './ui/resizer'
+import { createRunPanel } from './ui/runPanel'
+import { Store, WELCOME_TAB, changed, type IdeState } from './ui/store'
+import { createTitleBar } from './ui/titleBar'
 
-hljs.registerLanguage('java', java)
+const CRT_KEY = 'javalab.crt'
+const MOBILE_QUERY = window.matchMedia('(max-width: 900px)')
 
-const app = document.querySelector<HTMLDivElement>('#app')!
-
-const repoUrl = 'https://github.com/leandromlmoreira/Java'
-
-app.innerHTML = `
-  <header class="hero">
-    <div class="hero-inner">
-      <p class="eyebrow">JavaLab</p>
-      <h1>Aplicações Java num só repositório</h1>
-      <p class="lead">
-        Calculadora, Sudoku, jogo da memória e um board de tarefas com JDBC,
-        além de exercícios de fundamentos. Java não roda no navegador,
-        então esta página mostra o código real de cada aplicação e traz
-        uma versão jogável do Sudoku, portada para JavaScript.
-      </p>
-      <a class="hero-link" href="${repoUrl}" target="_blank" rel="noreferrer">Ver repositório no GitHub</a>
-    </div>
-  </header>
-
-  <main>
-    <section class="cards" aria-label="Aplicações do repositório">
-      ${apps.map(renderCard).join('')}
-    </section>
-
-    <section class="demo" aria-labelledby="demo-title">
-      <div class="demo-header">
-        <h2 id="demo-title">Sudoku jogável</h2>
-        <p>
-          Porte fiel da validação de linhas, colunas e quadrantes 3x3 de
-          <code>Sudoku.java</code> para TypeScript. Escolha uma célula vazia,
-          depois um número.
-        </p>
-      </div>
-      <div class="demo-body">
-        <div class="board" id="board" role="grid" aria-label="Tabuleiro de Sudoku"></div>
-        <div class="controls">
-          <div class="numpad" id="numpad" aria-label="Números"></div>
-          <div class="actions">
-            <button type="button" id="clear-btn">Limpar</button>
-            <button type="button" id="erase-btn">Apagar célula</button>
-          </div>
-          <p class="status" id="status" role="status">Selecione uma célula.</p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <p>Feito a partir do repositório <a href="${repoUrl}" target="_blank" rel="noreferrer">leandromlmoreira/Java</a>.</p>
-  </footer>
-`
-
-function renderCard(item: (typeof apps)[number]): string {
-  const highlighted = hljs.highlight(item.snippet, { language: item.language }).value
-  return `
-    <article class="card">
-      <h3>${item.title}</h3>
-      <p>${item.description}</p>
-      <p class="card-path">${item.path}</p>
-      <pre class="code-block"><code>${highlighted}</code></pre>
-      <p class="run-command">${escapeHtml(item.runCommand)}</p>
-    </article>
-  `
-}
-
-function escapeHtml(value: string): string {
-  return value
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-}
-
-const game = new SudokuGame()
-let selected: { linha: number; coluna: number } | null = null
-
-const boardEl = document.querySelector<HTMLDivElement>('#board')!
-const numpadEl = document.querySelector<HTMLDivElement>('#numpad')!
-const statusEl = document.querySelector<HTMLParagraphElement>('#status')!
-const clearBtn = document.querySelector<HTMLButtonElement>('#clear-btn')!
-const eraseBtn = document.querySelector<HTMLButtonElement>('#erase-btn')!
-
-function renderBoard(): void {
-  boardEl.innerHTML = ''
-  const tabuleiro = game.getTabuleiro()
-
-  for (let i = 0; i < 9; i++) {
-    for (let j = 0; j < 9; j++) {
-      const valor = tabuleiro[i][j]
-      const fixo = game.isFixo(i, j)
-      const cell = document.createElement('button')
-      cell.type = 'button'
-      cell.className = 'cell'
-      cell.setAttribute('role', 'gridcell')
-      cell.setAttribute(
-        'aria-label',
-        `Linha ${i + 1}, coluna ${j + 1}${valor ? `, valor ${valor}` : ', vazia'}`,
-      )
-      if (fixo) cell.classList.add('fixed')
-      if (selected && selected.linha === i && selected.coluna === j) {
-        cell.classList.add('selected')
-      }
-      if (i % 3 === 0) cell.classList.add('border-top')
-      if (j % 3 === 0) cell.classList.add('border-left')
-      if (i === 8) cell.classList.add('border-bottom')
-      if (j === 8) cell.classList.add('border-right')
-
-      cell.textContent = valor === 0 ? '' : String(valor)
-      cell.disabled = fixo
-      cell.addEventListener('click', () => {
-        selected = { linha: i, coluna: j }
-        statusEl.textContent = `Célula selecionada: linha ${i + 1}, coluna ${j + 1}.`
-        renderBoard()
-      })
-
-      boardEl.appendChild(cell)
-    }
+function readCrt(): boolean {
+  try {
+    return window.localStorage.getItem(CRT_KEY) !== 'off'
+  } catch {
+    return true
   }
 }
 
-function renderNumpad(): void {
-  numpadEl.innerHTML = ''
-  for (let numero = 1; numero <= 9; numero++) {
-    const btn = document.createElement('button')
-    btn.type = 'button'
-    btn.textContent = String(numero)
-    btn.addEventListener('click', () => placeNumber(numero))
-    numpadEl.appendChild(btn)
-  }
-}
-
-function placeNumber(numero: number): void {
-  if (!selected) {
-    statusEl.textContent = 'Selecione uma célula vazia antes de escolher um número.'
+function saveCrt(on: boolean): void {
+  try {
+    window.localStorage.setItem(CRT_KEY, on ? 'on' : 'off')
+  } catch {
     return
   }
-
-  const { linha, coluna } = selected
-  if (game.isFixo(linha, coluna)) {
-    statusEl.textContent = 'Essa posição é fixa e não pode ser alterada.'
-    return
-  }
-
-  const colocado = game.colocarNumero(linha, coluna, numero)
-  if (!colocado) {
-    statusEl.textContent = `O número ${numero} conflita com a linha, coluna ou quadrante.`
-    renderBoard()
-    return
-  }
-
-  statusEl.textContent = game.isCompleto()
-    ? 'Parabéns! Sudoku concluído sem conflitos.'
-    : `Número ${numero} colocado. Espaços vazios: ${game.espacosVazios()}.`
-  renderBoard()
 }
 
-clearBtn.addEventListener('click', () => {
-  game.limparTabuleiro()
-  selected = null
-  statusEl.textContent = 'Tabuleiro limpo. Números fixos mantidos.'
-  renderBoard()
+const initialState: IdeState = {
+  tabs: [WELCOME_TAB, 'projetos/sudoku/Sudoku.java'],
+  active: 'projetos/sudoku/Sudoku.java',
+  expanded: new Set(['projetos', 'projetos/sudoku']),
+  running: 'sudoku',
+  runId: 1,
+  mobileView: 'run',
+  drawer: false,
+  sidebar: true,
+  maximized: false,
+  crt: readCrt(),
+  cursor: { line: 1, col: 1 },
+}
+
+const store = new Store(initialState)
+const actions = new Actions(store)
+
+const runPanel = createRunPanel(store, actions)
+const body = h(
+  'div',
+  { class: 'ide-body' },
+  createActivityBar(store, actions),
+  createExplorer(store, actions),
+  createEditor(store, actions),
+  createResizer(runPanel),
+  runPanel,
+)
+const scrim = h('div', { class: 'scrim', 'aria-hidden': 'true', onclick: () => actions.toggleDrawer(false) })
+const ide = h(
+  'div',
+  { class: 'ide' },
+  createTitleBar(store, actions),
+  body,
+  createStatusBar(store, actions),
+  createMobileNav(store, actions),
+  scrim,
+)
+
+function syncLayout(state: IdeState): void {
+  ide.dataset.view = state.mobileView
+  ide.dataset.drawer = String(state.drawer)
+  ide.dataset.sidebar = String(state.sidebar)
+  ide.dataset.maximized = String(state.maximized)
+  document.documentElement.dataset.crt = state.crt ? 'on' : 'off'
+}
+
+store.subscribe((state, previous) => {
+  syncLayout(state)
+  if (changed(state, previous, 'crt')) saveCrt(state.crt)
 })
 
-eraseBtn.addEventListener('click', () => {
-  if (!selected) {
-    statusEl.textContent = 'Selecione uma célula preenchida para apagar.'
-    return
-  }
-  const { linha, coluna } = selected
-  const removido = game.removerNumero(linha, coluna)
-  statusEl.textContent = removido
-    ? 'Número removido.'
-    : 'Essa posição é fixa e não pode ser removida.'
-  renderBoard()
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && store.get().drawer) actions.toggleDrawer(false)
 })
 
-renderBoard()
-renderNumpad()
+MOBILE_QUERY.addEventListener('change', () => actions.toggleDrawer(false))
+
+syncLayout(store.get())
+document.querySelector('#app')?.replaceWith(ide)
