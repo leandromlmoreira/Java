@@ -5,6 +5,14 @@ on:
     branches: [main]
     paths:
       - 'web/**'
+      - 'projetos/**'
+      - 'exercicios/**'
+      - 'docs/**'
+      - 'bin/**'
+      - '*.md'
+      - '*.xml'
+      - '*.sh'
+      - '*.bat'
       - '.github/workflows/deploy-pages.yml'
   workflow_dispatch:
 
