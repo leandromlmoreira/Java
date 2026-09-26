@@ -8,7 +8,7 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 echo -e "${BLUE}========================================"
-echo -e "    SUDOKU - DIO CHALLENGE"
+echo -e "    JavaLab - Sudoku"
 echo -e "========================================${NC}"
 echo
 
@@ -45,7 +45,7 @@ compile_terminal() {
         echo
         echo -e "${BLUE}Executando versão terminal...${NC}"
         echo
-        echo -e "${YELLOW}Dica: Para usar os argumentos do desafio DIO, execute:${NC}"
+        echo -e "${YELLOW}Dica: para pré-carregar posições fixas no tabuleiro, execute:${NC}"
         echo "java Sudoku 0,0;4,false 1,0;7,false 2,0;9,true..."
         echo
         java Sudoku

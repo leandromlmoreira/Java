@@ -1,6 +1,6 @@
 @echo off
 echo ========================================
-echo    SUDOKU - DIO CHALLENGE
+echo    JavaLab - Sudoku
 echo ========================================
 echo.
 
@@ -49,7 +49,7 @@ echo Compilacao bem-sucedida!
 echo.
 echo Executando versao terminal...
 echo.
-echo Dica: Para usar os argumentos do desafio DIO, execute:
+echo Dica: para pre-carregar posicoes fixas no tabuleiro, execute:
 echo java Sudoku 0,0;4,false 1,0;7,false 2,0;9,true...
 echo.
 java Sudoku

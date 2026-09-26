@@ -1,6 +1,6 @@
 @echo off
 echo ========================================
-echo    Java Learning Repository Builder
+echo    JavaLab - Build
 echo ========================================
 echo.
 

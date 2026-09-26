@@ -169,21 +169,18 @@ public class Sudoku {
     }
     
     private static boolean podeColocarNumero(int linha, int coluna, int numero) {
-        // Verificar linha
         for (int j = 0; j < TAMANHO; j++) {
             if (j != coluna && tabuleiro[linha][j] == numero) {
                 return false;
             }
         }
-        
-        // Verificar coluna
+
         for (int i = 0; i < TAMANHO; i++) {
             if (i != linha && tabuleiro[i][coluna] == numero) {
                 return false;
             }
         }
-        
-        // Verificar quadrado 3x3
+
         int quadradoLinha = (linha / 3) * 3;
         int quadradoColuna = (coluna / 3) * 3;
         
@@ -200,8 +197,7 @@ public class Sudoku {
     
     private static void verificarJogo() {
         boolean temErros = false;
-        
-        // Verificar linhas
+
         for (int i = 0; i < TAMANHO; i++) {
             for (int j = 0; j < TAMANHO; j++) {
                 if (tabuleiro[i][j] != 0) {
