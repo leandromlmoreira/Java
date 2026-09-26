@@ -1,5 +1,9 @@
 # JavaLab
 
+**[Ver ao vivo](https://leandromlmoreira.github.io/Java/)**
+
+[![Preview do site](docs/preview.png)](https://leandromlmoreira.github.io/Java/)
+
 Coleção de aplicações e utilitários em Java puro (sem frameworks pesados), cobrindo desde operações matemáticas básicas até um sistema de gestão de tarefas com persistência em banco de dados.
 
 Cada módulo é independente e pode ser compilado e executado isoladamente — não há acoplamento entre eles.
@@ -84,6 +88,18 @@ cd exercicios/exercicio1
 javac Exercicio1.java
 java Exercicio1
 ```
+
+## Front-end de apresentação
+
+Como Java não roda no navegador, a pasta `web/` traz uma página estática (Vite + TypeScript) que apresenta cada aplicação com sua descrição, um trecho de código real do repositório com destaque de sintaxe, e uma versão jogável do Sudoku portada fielmente para JavaScript — incluindo a mesma validação de linhas, colunas e quadrantes 3x3 de `Sudoku.java`.
+
+```
+cd web
+npm install
+npm run dev
+```
+
+O deploy é automático via GitHub Actions para o GitHub Pages a cada push em `web/` na branch `main`.
 
 ## Stack
 
